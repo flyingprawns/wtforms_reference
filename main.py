@@ -1,19 +1,19 @@
 from flask import Flask, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Email, Length
 from flask_bootstrap import Bootstrap
 
 
 class LoginForm(FlaskForm):
-    email = StringField(label='Email', validators=[DataRequired()])
-    password = PasswordField(label='Password', validators=[DataRequired()])
+    email = StringField(label='Email', validators=[DataRequired()])  # Add "Email()" as an argument for email validation
+    password = PasswordField(label='Password', validators=[DataRequired(), Length(min=8)])
     submit = SubmitField(label='Log In')
 
 
 app = Flask(__name__)
-Bootstrap(app)
 app.secret_key = "throwawaykey"
+Bootstrap(app)
 
 
 # ------ Website Pages ------ #
